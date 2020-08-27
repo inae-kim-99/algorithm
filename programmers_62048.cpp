@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/62048
+
 int gcd(int a, int b){ // 최대공약수 return
     if(b==0)
         return a;
