@@ -5,18 +5,18 @@ using namespace std;
 
 string checkStr(string str) {
 	vector<char> v;
-	// ¿­±â -> ÀúÀå, ´İ±â -> ¸¶Áö¸·À¸·Î ¿¬ °ıÈ£¿Í ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+	// ì—´ê¸° -> ì €ì¥, ë‹«ê¸° -> ë§ˆì§€ë§‰ìœ¼ë¡œ ì—° ê´„í˜¸ì™€ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸
 	for (int i = 0; i < str.length(); i++) {
-		if (str[i] == '(' || str[i] == '[') { // °ıÈ£ ´İ±â
+		if (str[i] == '(' || str[i] == '[') { // ê´„í˜¸ ì—´ê¸°
 			v.push_back(str[i]);
 		}
-		else if (str[i] == ')') { // °ıÈ£ ´İ±â
+		else if (str[i] == ')') { // ê´„í˜¸ ë‹«ê¸°
 			if (v.size() > 0 && v.back() == '(')
 				v.pop_back();
 			else
 				return "no";
 		}
-		else if (str[i] == ']') { // °ıÈ£ ´İ±â
+		else if (str[i] == ']') { // ê´„í˜¸ ë‹«ê¸°
 			if (v.size() > 0 && v.back() == '[')
 				v.pop_back();
 			else {
@@ -34,7 +34,7 @@ int main() {
 	vector<string> answer;
 	while (true) {
 		string str = "", input;
-		// ÇÑ ¹®Àå ÀĞ±â
+		// í•œ ë¬¸ì¥ ì½ê¸°
 		while (true) {
 			getline(cin, input);
 			str += input;
@@ -43,7 +43,7 @@ int main() {
 		}
 		if (str == ".")
 			break;
-		// ¹®Àå °Ë»ç
+		// ë¬¸ì¥ ê²€ì‚¬
 		answer.push_back(checkStr(str));
 	}
 	for (int i = 0; i < answer.size(); i++) {
