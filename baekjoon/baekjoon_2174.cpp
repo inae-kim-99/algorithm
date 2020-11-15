@@ -4,9 +4,7 @@
 using namespace std;
 
 struct Robot {
-	int x;
-	int y;
-	int direct;
+	int x, y, dir;
 };
 
 int main() {
@@ -19,20 +17,20 @@ int main() {
 
 	//각 로봇들의 초기위치, 방향
 	for (int i = 0; i < N; i++) {
-		int x, y,direct;
+		int x, y,dir;
 		char d;
 		cin >> x >> y >> d;
 
 		if (d == 'N')
-			direct = 0;
+			dir = 0;
 		else if (d == 'E')
-			direct = 1;
+			dir = 1;
 		else if (d == 'S')
-			direct = 2;
+			dir = 2;
 		else
-			direct = 3;
+			dir = 3;
 
-		Robot r = { x,y,direct };
+		Robot r = { x,y,dir };
 		robotList.push_back(r);
 		//cout << robotList.size() << endl;
 
@@ -40,36 +38,32 @@ int main() {
 
 	//명령
 	for (int i = 0; i < M; i++) {
+
 		int idx, repeat;
 		char order;
 		cin >> idx >> order >> repeat;
+
 		if (order == 'L') {
-			if (robotList[idx - 1].direct - repeat%4 <= 0) {
-				robotList[idx - 1].direct = robotList[idx - 1].direct - repeat % 4 + 4;
-			}
-			else {
-				robotList[idx - 1].direct -= repeat;
-			}
+			robotList[idx - 1].dir -= repeat % 4;
+			if (robotList[idx - 1].dir < 0)
+				robotList[idx - 1].dir += 4;
 		}
 		else if (order == 'R') {
-			if (robotList[idx - 1].direct + repeat % 4 > 3) {
-				robotList[idx - 1].direct -= 4;
-			}
-			else {
-				robotList[idx - 1].direct += repeat % 4;
-			}
+			robotList[idx - 1].dir += repeat % 4;
+			if (robotList[idx - 1].dir > 3)
+				robotList[idx - 1].dir -= 4;
 		}
 		else {
 			int dx, dy;
-			if (robotList[idx-1].direct ==0) { // y방향위
+			if (robotList[idx-1].dir ==0) { // y방향위
 				dx = 0;
 				dy = 1;
 			}
-			else if (robotList[idx - 1].direct == 2) { // y방향아래
+			else if (robotList[idx - 1].dir == 2) { // y방향아래
 				dx = 0;
 				dy = -1;
 			}
-			else if (robotList[idx - 1].direct == 1) { // x 오른쪽
+			else if (robotList[idx - 1].dir == 1) { // x 오른쪽
 				dx = 1;
 				dy = 0;
 			}
@@ -80,8 +74,8 @@ int main() {
 			for (int k = 0; k < repeat; k++) {
 				robotList[idx - 1].x += dx;
 				robotList[idx - 1].y += dy;
-				if (robotList[idx - 1].x == 0 || robotList[idx - 1].x == A
-					|| robotList[idx-1].y == 0 || robotList[idx - 1].y == B) {
+				if (robotList[idx - 1].x == 0 || robotList[idx - 1].x > A
+					|| robotList[idx-1].y == 0 || robotList[idx - 1].y > B) {
 					cout << "Robot " << idx << " crashes into the wall" << endl;
 					return 0;
 				}
