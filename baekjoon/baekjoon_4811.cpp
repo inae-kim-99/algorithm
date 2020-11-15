@@ -5,20 +5,16 @@ using namespace std;
 long long dp[31][31];
 
 long long calculate(int one, int half) {
-
-	if (dp[one][half] != 0) { // ÀÌ¹Ì °è»êµÈ °ªÀÌ¸é
+	
+	if (dp[one][half] != 0) // ì´ë¯¸ ê³„ì‚°ëœ ê°’ì´ë©´
 		return dp[one][half];
-	}
-
-	if (one == 0) // ³²Àº ¾àÀÌ ¸ğµÎ ¹İ¾ËÀÌ¸é
+	if (one == 0) // ë‚¨ì€ ì•½ì´ ëª¨ë‘ ë°˜ì•Œì´ë©´
 		return 1;
-
-	if (half == 0) {
+	
+	if (half == 0)
 		return dp[one][half] = calculate(one - 1, 1);
-	}
-	else {
+	else
 		return dp[one][half] = calculate(one - 1, half + 1) + calculate(one, half - 1);
-	}
 
 }
 
@@ -28,16 +24,11 @@ void main() {
 	vector<long long> ans;
 
 	while (true) {
-
 		cin >> N;
-
-		if (N == 0) // ÀÔ·ÂÀÇ ¸¶Áö¸· ÁÙ
+		if (N == 0) // ì…ë ¥ì˜ ë§ˆì§€ë§‰ ì¤„
 			break;
-
 		ans.push_back(calculate(N - 1, 1));
-
 	}
-
 	for (int i = 0; i < ans.size(); i++)
 		cout << ans[i] << "\n";
 }
