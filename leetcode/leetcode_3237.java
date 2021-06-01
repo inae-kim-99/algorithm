@@ -3,26 +3,26 @@
 
 class Solution {
     public int findNumbers(int[] nums) {
-        
+
         int answer = 0;
-        
-        for(int n : nums){
-            
+
+        for (int n : nums) {
+
             // Solve 1)
             // if(Integer.toString(n).length() % 2 == 0)
             //     answer++;
-            
+
             // Solve 2)
             int digits = 0;
-            while(n > 0){
+            while (n > 0) {
                 n /= 10;
                 digits++;
             }
-            
-            if(digits % 2 == 0)
+
+            if (digits % 2 == 0)
                 answer++;
         }
-        
+
         return answer;
     }
 }
