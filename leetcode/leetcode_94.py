@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/binary-tree-inorder-traversal/
 # leetcode 94 : Binary Tree Inorder Traversal
-# LEVEL : Medium
+# LEVEL : Easy
 
 # Definition for a binary tree node.
 # class TreeNode:
